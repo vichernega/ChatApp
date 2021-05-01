@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--TEXT SIZE-->
+
+    <dimen name="middle_text_size">20sp</dimen>
+    <dimen name="heading_text_size">28sp</dimen>
+
+
+    <!--ICON SIZE-->
+
+
+
+    <!--MARGINS-->
+
+    <dimen name="side_normal_margin">50dp</dimen>
+    <dimen name="small_margin">7dp</dimen>
+    <dimen name="normal_margin">20dp</dimen>
+    <dimen name="middle_margin">30dp</dimen>
+
+
+
+    <dimen name="large_margin">28dp</dimen>
+    <dimen name="larger_margin">37dp</dimen>
+    <dimen name="small_container_height">55dp</dimen>
+    <dimen name="after_heading_margin">40dp</dimen>
+    <dimen name="after_heading_large_margin">55dp</dimen>
+
+    <dimen name="recycler_view_small_margin">4dp</dimen>
+    <dimen name="recycler_view_normal_margin">8dp</dimen>
+
+    <!--ROUND CORNERS-->
+
+    <dimen name="btn_corner">30dp</dimen>
+    <dimen name="et_corner">18dp</dimen>
+
+
+
+</resources>
