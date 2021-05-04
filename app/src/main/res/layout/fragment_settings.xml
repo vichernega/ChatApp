@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".view.SettingsFragment">
+
+    <!--PROFILE IMAGE-->
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_marginTop="@dimen/normal_margin"
+        android:layout_width="@dimen/big_circle_image"
+        android:layout_height="@dimen/big_circle_image"
+        android:src="@drawable/default_profile_pic"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!--FULL NAME-->
+    <TextView
+        android:id="@+id/tv_full_name"
+        style="@style/LargeText"
+        tools:text="Victoria Chernega"
+        android:layout_marginTop="@dimen/normal_margin"
+        app:layout_constraintTop_toBottomOf="@+id/profile_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!--PHONE NUMBER-->
+    <TextView
+        android:id="@+id/tv_phone_number"
+        style="@style/NormalLightText"
+        tools:text="+380685863372"
+        android:layout_marginTop="@dimen/small_margin"
+        app:layout_constraintTop_toBottomOf="@+id/tv_full_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!--EMAIL-->
+    <TextView
+        android:id="@+id/tv_email"
+        style="@style/NormalLightText"
+        tools:text="vi.cherneha@gmail.com"
+        app:layout_constraintTop_toBottomOf="@+id/tv_phone_number"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <View
+        style="@style/Separator"
+        android:layout_marginTop="@dimen/normal_margin"
+        app:layout_constraintTop_toBottomOf="@id/tv_email"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!--CHANGE PERSONAL INFO BLOCK-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/change_personal_info_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/normal_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_email">
+
+        <!--ICON-->
+        <ImageView
+            android:id="@+id/iv_change_person_info"
+            android:layout_width="@dimen/small_icon"
+            android:layout_height="@dimen/small_icon"
+            android:layout_marginTop="@dimen/small_normal_margin"
+            android:layout_marginStart="@dimen/middle_margin"
+            android:layout_marginBottom="@dimen/small_normal_margin"
+            android:src="@drawable/ic_change"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <!--TEXT-->
+        <TextView
+            android:id="@+id/tv_change_personal_info"
+            style="@style/NormalText"
+            android:text="@string/change_personal_information"
+            android:layout_marginStart="@dimen/small_margin"
+            app:layout_constraintStart_toEndOf="@+id/iv_change_person_info"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <View
+            style="@style/Separator"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--LOG OUT BLOCK-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/log_out_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/change_personal_info_container">
+
+        <!--ICON-->
+        <ImageView
+            android:id="@+id/iv_log_out_info"
+            android:layout_width="@dimen/small_icon"
+            android:layout_height="@dimen/small_icon"
+            android:layout_marginTop="@dimen/small_normal_margin"
+            android:layout_marginStart="@dimen/middle_margin"
+            android:layout_marginBottom="@dimen/small_normal_margin"
+            android:src="@drawable/ic_logout"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <!--TEXT-->
+        <TextView
+            android:id="@+id/tv_log_out"
+            style="@style/NormalText"
+            android:text="@string/log_out"
+            android:layout_marginStart="@dimen/small_margin"
+            app:layout_constraintStart_toEndOf="@+id/iv_log_out_info"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <View
+            style="@style/Separator"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,18 +3,23 @@
 
     <!--TEXT SIZE-->
 
+    <dimen name="normal_text_size">16sp</dimen>
     <dimen name="middle_text_size">20sp</dimen>
+    <dimen name="large_text_size">24sp</dimen>
     <dimen name="heading_text_size">28sp</dimen>
 
 
     <!--ICON SIZE-->
 
+    <dimen name="big_circle_image">100dp</dimen>
+    <dimen name="small_icon">30dp</dimen>
 
 
     <!--MARGINS-->
 
     <dimen name="side_normal_margin">50dp</dimen>
     <dimen name="small_margin">7dp</dimen>
+    <dimen name="small_normal_margin">12dp</dimen>
     <dimen name="normal_margin">20dp</dimen>
     <dimen name="middle_margin">30dp</dimen>
 
