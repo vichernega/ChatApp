@@ -8,6 +8,7 @@ import com.example.chatapp.databinding.ActivityMainBinding
 import com.example.chatapp.utilits.APP_ACTIVITY
 import com.example.chatapp.utilits.replaceActivity
 import com.example.chatapp.utilits.replaceFragment
+import com.example.chatapp.utilits.replaceFragmentWithNoBackStack
 import com.example.chatapp.view.ChatsFragment
 import com.example.chatapp.view.ContactsFragment
 import com.example.chatapp.view.SettingsFragment
@@ -26,9 +27,12 @@ class MainActivity : AppCompatActivity() {
         if(FirebaseAuth.getInstance().currentUser == null){
             replaceActivity(RegisterActivity())
         } else {
-            replaceFragment(ChatsFragment())
+            replaceFragmentWithNoBackStack(ChatsFragment())
+            binding.bottomNavBar.selectedItemId = R.id.nav_chats
+            FirestoreObject.getUser()                               // get user info from DB to show it in fragment
         }
         setStatusBarParams()
+        setOnBackIconClick()
     }
 
     override fun onStart() {
@@ -38,17 +42,43 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNavBar.setOnNavigationItemSelectedListener {
             when(it.itemId){
-                R.id.nav_contacts -> { replaceFragment(ContactsFragment())
+                R.id.nav_contacts -> { replaceFragmentWithNoBackStack(ContactsFragment())
                                     setToolbarTitle("Contacts")
                                     hideNavigationIcon() }
-                R.id.nav_chats -> { replaceFragment(ChatsFragment())
+                R.id.nav_chats -> { replaceFragmentWithNoBackStack(ChatsFragment())
                                     setToolbarTitle("Chats")
                                     hideNavigationIcon() }
-                R.id.nav_settings -> { replaceFragment(SettingsFragment())
+                R.id.nav_settings -> { replaceFragmentWithNoBackStack(SettingsFragment())
                                     setToolbarTitle("Settings")
                                     hideNavigationIcon() }
             }
             true
+        }
+    }
+
+    override fun onBackPressed() {
+        val currentFragment = supportFragmentManager.findFragmentById(R.id.activity_container)
+
+        if (currentFragment != null){
+            // if current fragment is ChatsFragment app closes
+            if (binding.bottomNavBar.selectedItemId == R.id.nav_chats && currentFragment is ChatsFragment){
+                super.onBackPressed()
+                finish()
+            }
+            // if current fragment is ChatsFragment or SettingsFragment app closes
+            else if (currentFragment is ContactsFragment || currentFragment is SettingsFragment){
+                binding.bottomNavBar.selectedItemId = R.id.nav_chats
+            }
+            // in another case user navigates by back stack
+            else {
+                super.onBackPressed()
+            }
+        }
+    }
+
+    fun setOnBackIconClick(){
+        binding.toolbar.setNavigationOnClickListener {
+            onBackPressed()
         }
     }
 

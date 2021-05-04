@@ -24,7 +24,7 @@ class ChangePersonalInfoFragment : Fragment(R.layout.fragment_change_personal_in
                               savedInstanceState: Bundle?): View? {
         binding = FragmentChangePersonalInfoBinding.inflate(layoutInflater, container, false)
 
-        APP_ACTIVITY.setToolbarTitle("Change personal information")
+        APP_ACTIVITY.setToolbarTitle("")
         APP_ACTIVITY.showNavigationIcon()
         showUserInfo()
         setUpClickListeners()

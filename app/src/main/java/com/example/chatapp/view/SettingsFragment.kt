@@ -21,12 +21,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
     private lateinit var binding: FragmentSettingsBinding
     private val viewModel by viewModels<SettingsViewModel>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        viewModel.getUserInfo()     // get user info from DB to show it in fragment
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentSettingsBinding.inflate(layoutInflater, container, false)
 
