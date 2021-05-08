@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--TITLE-->
+    <TextView
+        android:id="@+id/tv_choose"
+        style="@style/LargeText"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/small_normal_margin"
+        android:text="@string/choose_colon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    <View
+        style="@style/Separator"
+        android:layout_margin="@dimen/small_normal_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_choose"/>
+
+
+    <!--TAKE PHOTO CONTAINER-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/take_photo_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_normal_margin"
+        app:layout_constraintTop_toBottomOf="@+id/tv_choose"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!--ICON-->
+        <ImageView
+            android:id="@+id/iv_take_photo"
+            android:layout_width="@dimen/small_icon"
+            android:layout_height="@dimen/small_icon"
+            android:layout_margin="@dimen/small_normal_margin"
+            android:src="@drawable/ic_take_a_photo"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <!--TEXT-->
+        <TextView
+            android:id="@+id/tv_take_a_photo"
+            style="@style/LargeText"
+            android:text="@string/take_a_photo"
+            android:layout_margin="@dimen/small_normal_margin"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_take_photo"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <!--PHOTO FROM GALLERY CONTAINER-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/photo_from_gallery_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/take_photo_container"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!--ICON-->
+        <ImageView
+            android:id="@+id/iv_photo_from_gallery"
+            android:layout_width="@dimen/small_icon"
+            android:layout_height="@dimen/small_icon"
+            android:layout_margin="@dimen/small_normal_margin"
+            android:src="@drawable/ic_add_photo_gallery"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <!--TEXT-->
+        <TextView
+            android:id="@+id/tv_choose_from_gallery"
+            style="@style/LargeText"
+            android:text="@string/choose_from_gallery"
+            android:layout_margin="@dimen/small_normal_margin"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_photo_from_gallery"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

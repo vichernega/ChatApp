@@ -11,7 +11,7 @@
 
     <!--ICON SIZE-->
 
-    <dimen name="big_circle_image">100dp</dimen>
+    <dimen name="big_circle_image">150dp</dimen>
     <dimen name="small_icon">30dp</dimen>
 
 

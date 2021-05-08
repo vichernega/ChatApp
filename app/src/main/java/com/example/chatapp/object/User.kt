@@ -9,6 +9,7 @@ object User {
     var lastName: String = ""
     var phone: String = ""
     var email: String = ""
+    var image: String = ""
 
     fun setUser(id: String, firstName: String, lastName: String, phone: String, email: String){
         this.id = id

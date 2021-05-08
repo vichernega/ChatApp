@@ -3,7 +3,7 @@ package com.example.chatapp.model
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.example.chatapp.`object`.FirestoreObject
+import com.example.chatapp.`object`.FirebaseObject
 import com.example.chatapp.`object`.User
 import com.example.chatapp.utilits.showToast
 import com.google.firebase.auth.FirebaseUser
@@ -21,7 +21,7 @@ class RegisterRepository {
                 if (it.isSuccessful){
                     _userLiveData.postValue(Firebase.auth.currentUser)                                 // change liveData
                     User.setUser(Firebase.auth.uid.toString(), firstName, lastName, phone, email)   // save data in local user
-                    FirestoreObject.saveUser(User)                                                   // save data in remote user
+                    FirebaseObject.saveUser(User)                                                   // save data in remote user
                     showToast("Welcome!")
                 }
                 else{

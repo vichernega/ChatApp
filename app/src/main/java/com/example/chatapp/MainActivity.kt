@@ -3,16 +3,18 @@ package com.example.chatapp
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.example.chatapp.`object`.FirestoreObject
+import androidx.lifecycle.lifecycleScope
+import com.example.chatapp.`object`.FirebaseObject
 import com.example.chatapp.databinding.ActivityMainBinding
 import com.example.chatapp.utilits.APP_ACTIVITY
 import com.example.chatapp.utilits.replaceActivity
-import com.example.chatapp.utilits.replaceFragment
 import com.example.chatapp.utilits.replaceFragmentWithNoBackStack
 import com.example.chatapp.view.ChatsFragment
 import com.example.chatapp.view.ContactsFragment
 import com.example.chatapp.view.SettingsFragment
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,12 +26,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         APP_ACTIVITY = this
-        if(FirebaseAuth.getInstance().currentUser == null){
+        if(FirebaseAuth.getInstance().currentUser == null){         // Registration activity if user is null
             replaceActivity(RegisterActivity())
         } else {
-            replaceFragmentWithNoBackStack(ChatsFragment())
+            replaceFragmentWithNoBackStack(ChatsFragment())         // show ChatsFragment as first in
+            setToolbarTitle("Chats")
             binding.bottomNavBar.selectedItemId = R.id.nav_chats
-            FirestoreObject.getUser()                               // get user info from DB to show it in fragment
+            lifecycleScope.launch(Dispatchers.IO){
+                FirebaseObject.getUser()                           // get user info from DB to show it in SettingsFragment
+            }
         }
         setStatusBarParams()
         setOnBackIconClick()
@@ -40,6 +45,7 @@ class MainActivity : AppCompatActivity() {
 
         hideNavigationIcon()
 
+        /**Bottom navigation bar on item click*/
         binding.bottomNavBar.setOnNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.nav_contacts -> { replaceFragmentWithNoBackStack(ContactsFragment())
