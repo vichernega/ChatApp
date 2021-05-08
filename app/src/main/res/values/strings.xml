@@ -20,4 +20,5 @@
     <string name="choose_colon">Choose:</string>
     <string name="take_a_photo">Take a photo</string>
     <string name="choose_from_gallery">Choose from gallery</string>
+    <string name="empty">Empty</string>
 </resources>

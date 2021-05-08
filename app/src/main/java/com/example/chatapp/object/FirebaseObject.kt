@@ -1,5 +1,6 @@
 package com.example.chatapp.`object`
 
+import android.net.Uri
 import android.util.Log
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
@@ -19,7 +20,7 @@ object FirebaseObject {
     /** FIRESTORE FUNCTIONS */
 
     /**Saving user information in database*/
-    fun saveUser(user: User){
+    fun saveUser(user: UserObject){
         firestore.collection(COLLECTION_USERS).document(user.id)
                 .set(user)
                 .addOnCompleteListener {
@@ -35,14 +36,14 @@ object FirebaseObject {
         firestore.collection(COLLECTION_USERS).document(Firebase.auth.currentUser.uid)
                 .get()
                 .addOnSuccessListener {
-                    User.setUser(it)
+                    UserObject.setUser(it)
                     Log.d("FIRESTORE", "getUser() is SUCCESSFUL")
                 }
                 .addOnFailureListener { Log.d("FIRESTORE", "getUser() is FAILED: ${it.message}") }
     }
 
     /** Get user image from DB*/
-    suspend fun getUserProfileImage(user: User): Boolean{
+    suspend fun getUserProfileImage(user: UserObject): Boolean{
         var isSuccess = false
         val imageRef = storage.child(FOLDER_IMAGES + user.id + "/" + user.image)
 
@@ -50,10 +51,11 @@ object FirebaseObject {
             .addOnSuccessListener {
                 ImageObject.uri = it       // save downloaded uri to imageObject
                 isSuccess = true
-                Log.d("IMAGE", "getUserProfileImage1() is SUCCESSFUL")
+                Log.d("IMAGE", "getUserProfileImage() is SUCCESSFUL")
             }
-            .addOnFailureListener { Log.d("IMAGE", "getUserProfileImage1() is FAILED: ${it.message}") }
+            .addOnFailureListener { Log.d("IMAGE", "getUserProfileImage() is FAILED: ${it.message}") }
             .await()
         return isSuccess        // true if task is successful
     }
+
 }

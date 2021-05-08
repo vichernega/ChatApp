@@ -74,6 +74,20 @@
         <item name="android:textSize">@dimen/normal_text_size</item>
         <item name="android:textColor">@color/colorBlack</item>
     </style>
+
+    <style name="SmallLightText">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textSize">@dimen/small_text_size</item>
+        <item name="android:textColor">@color/colorSilver</item>
+    </style>
+
+    <style name="MiddleText">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textSize">@dimen/normal_middle_text_size</item>
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
     
     
     <!--EDIT TEXT STYLE-->
@@ -103,6 +117,15 @@
         <item name="android:layout_height">0.5dp</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:background">@color/colorSilver</item>
+    </style>
+
+    <!-- PROGRESS BAR-->
+    <style name="ProgressBar">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:indeterminate">true</item>
+        <item name="android:indeterminateTintMode">src_atop</item>
+        <item name="android:indeterminateTint">@color/colorBlue</item>
     </style>
 
 </resources>

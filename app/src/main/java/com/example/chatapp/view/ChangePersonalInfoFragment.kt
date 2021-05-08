@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.example.chatapp.R
-import com.example.chatapp.`object`.User
+import com.example.chatapp.`object`.UserObject
 import com.example.chatapp.databinding.FragmentChangePersonalInfoBinding
 import com.example.chatapp.utilits.APP_ACTIVITY
 import com.example.chatapp.utilits.replaceFragmentWithNoBackStack
@@ -39,9 +39,9 @@ class ChangePersonalInfoFragment : Fragment(R.layout.fragment_change_personal_in
     }
 
     fun showUserInfo(){
-        binding.etFirstName.setText(User.firstName)
-        binding.etLastName.setText(User.lastName)
-        binding.etPhoneNumber.setText(User.phone)
+        binding.etFirstName.setText(UserObject.firstName)
+        binding.etLastName.setText(UserObject.lastName)
+        binding.etPhoneNumber.setText(UserObject.phone)
     }
 
     fun setUpClickListeners(){

@@ -4,7 +4,7 @@ import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.chatapp.`object`.User
+import com.example.chatapp.`object`.UserObject
 import com.example.chatapp.model.SettingsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -13,15 +13,15 @@ import kotlinx.coroutines.launch
 class SettingsViewModel: ViewModel() {
 
     private val repo = SettingsRepository()
-    private var _userLiveData: MutableLiveData<User> = repo.userLiveData            //User live data
-    val userLiveData: MutableLiveData<User> get() = _userLiveData
+    private var _userLiveData: MutableLiveData<UserObject> = repo.userLiveData            //User live data
+    val userLiveData: MutableLiveData<UserObject> get() = _userLiveData
 
     private var _isProfileImageDownloadedLiveData = repo.isProfileImageDownloadedLiveData   // flag for user photo download
     val isProfileImageDownloadedLiveData get() = _isProfileImageDownloadedLiveData
 
     // get user photo if it exists
     fun getProfileImage(){
-        if (User.image.isNotEmpty()){
+        if (UserObject.image.isNotEmpty()){
             viewModelScope.launch(Dispatchers.IO){
                 repo.getProfileImage()
             }

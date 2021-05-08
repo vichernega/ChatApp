@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.example.chatapp.R
 import com.example.chatapp.RegisterActivity
 import com.example.chatapp.`object`.ImageObject
-import com.example.chatapp.`object`.User
+import com.example.chatapp.`object`.UserObject
 import com.example.chatapp.databinding.FragmentSettingsBinding
 import com.example.chatapp.utilits.APP_ACTIVITY
 import com.example.chatapp.utilits.replaceActivity
@@ -35,9 +35,9 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
     }
 
     fun showUserInfo(){
-        binding.tvFullName.text = User.firstName + " " + User.lastName
-        binding.tvPhoneNumber.text = User.phone
-        binding.tvEmail.text = User.email
+        binding.tvFullName.text = UserObject.firstName + " " + UserObject.lastName
+        binding.tvPhoneNumber.text = UserObject.phone
+        binding.tvEmail.text = UserObject.email
         viewModel.getProfileImage()         // download profile image and set in observeLiveData
     }
 

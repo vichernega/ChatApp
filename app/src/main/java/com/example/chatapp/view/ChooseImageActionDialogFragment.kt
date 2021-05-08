@@ -13,7 +13,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.example.chatapp.R
 import com.example.chatapp.`object`.ImageUtilits
-import com.example.chatapp.`object`.User
+import com.example.chatapp.`object`.UserObject
 import com.example.chatapp.databinding.DialogChooseImageActionBinding
 import com.example.chatapp.utilits.APP_ACTIVITY
 import com.example.chatapp.utilits.PERMISSION_CODE_CAMERA_IMAGE
@@ -53,13 +53,13 @@ class ChooseImageActionDialogFragment: DialogFragment(R.layout.dialog_choose_ima
     /**taking picture with camera*/
     val cameraTakePicture = registerForActivityResult(TakePicture()){ success ->
         if (success){
-            User.image = imageUri.toString()                                   // save image to local User
+            UserObject.image = imageUri.toString()                                   // save image to local User
             Log.d("IMAGE", "IN CHOOSE IMAGE ACTION")
             imageUri?.let { it -> viewModel.saveUserImage(it) }      // change viewModel liveData
 
             Log.d("IMAGE", "Success")
             Log.d("IMAGE", imageUri.toString())
-            Log.d("IMAGE", User.image.toString())
+            Log.d("IMAGE", UserObject.image.toString())
             dismiss()           // close dialog
         } else {
             Log.d("IMAGE", "Task to make a photo is failed")
@@ -84,11 +84,11 @@ class ChooseImageActionDialogFragment: DialogFragment(R.layout.dialog_choose_ima
     /** get existing picture from gallery*/
     val takePictureFromGallery = registerForActivityResult(GetContent()) {
         if (it != null) {
-            User.image = it.toString()                 // save image to local User
+            UserObject.image = it.toString()                 // save image to local User
             viewModel.saveUserImage(it)      // change viewModel liveData
 
             Log.d("IMAGE", "uri val in choose image ---- " + it.toString())
-            Log.d("IMAGE", "userImage val in choose image ---- " + User.image.toString())
+            Log.d("IMAGE", "userImage val in choose image ---- " + UserObject.image.toString())
             dismiss()               //close dialog
         } else {
             Log.d("IMAGE", "Task to get photo from gallery is failed")

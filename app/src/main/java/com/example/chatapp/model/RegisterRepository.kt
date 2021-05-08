@@ -4,7 +4,7 @@ package com.example.chatapp.model
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.chatapp.`object`.FirebaseObject
-import com.example.chatapp.`object`.User
+import com.example.chatapp.`object`.UserObject
 import com.example.chatapp.utilits.showToast
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
@@ -20,8 +20,8 @@ class RegisterRepository {
             .addOnCompleteListener {
                 if (it.isSuccessful){
                     _userLiveData.postValue(Firebase.auth.currentUser)                                 // change liveData
-                    User.setUser(Firebase.auth.uid.toString(), firstName, lastName, phone, email)   // save data in local user
-                    FirebaseObject.saveUser(User)                                                   // save data in remote user
+                    UserObject.setUser(Firebase.auth.uid.toString(), firstName, lastName, phone, email)   // save data in local user
+                    FirebaseObject.saveUser(UserObject)                                                   // save data in remote user
                     showToast("Welcome!")
                 }
                 else{
