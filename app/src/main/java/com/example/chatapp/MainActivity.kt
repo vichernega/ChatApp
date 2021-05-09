@@ -8,9 +8,11 @@ import com.example.chatapp.`object`.FirebaseObject
 import com.example.chatapp.databinding.ActivityMainBinding
 import com.example.chatapp.utilits.APP_ACTIVITY
 import com.example.chatapp.utilits.replaceActivity
+import com.example.chatapp.utilits.replaceFragment
 import com.example.chatapp.utilits.replaceFragmentWithNoBackStack
 import com.example.chatapp.view.ChatsFragment
 import com.example.chatapp.view.ContactsFragment
+import com.example.chatapp.view.CreateGroupChatFragment
 import com.example.chatapp.view.SettingsFragment
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.Dispatchers
@@ -107,5 +109,24 @@ class MainActivity : AppCompatActivity() {
     }
     fun showNavigationIcon(){
         binding.toolbar.navigationIcon = getDrawable(R.drawable.ic_arrow_back)
+    }
+    fun hideCreateChatIcon(){
+        val createChatIcon = binding.toolbar.menu.findItem(R.id.add_chat)
+        createChatIcon.isVisible = false
+    }
+    fun showCreateChatIcon(){
+        val createChatIcon = binding.toolbar.menu.findItem(R.id.add_chat)
+        createChatIcon.isVisible = true
+
+        createChatIcon.setOnMenuItemClickListener {
+            replaceFragment(CreateGroupChatFragment())
+            true
+        }
+    }
+    fun hideBottomNavBar(){
+        binding.bottomNavBar.visibility = View.GONE
+    }
+    fun showBottomnavBar(){
+        binding.bottomNavBar.visibility = View.VISIBLE
     }
 }

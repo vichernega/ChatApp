@@ -10,26 +10,33 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import com.example.chatapp.R
 import com.example.chatapp.`object`.User
-import com.example.chatapp.adapter.ContactsRecyclerViewAdapter
-import com.example.chatapp.databinding.FragmentContactsBinding
+import com.example.chatapp.adapter.CreateGroupChatRecyclerViewAdapter
+import com.example.chatapp.databinding.FragmentCreateGroupChatBinding
 import com.example.chatapp.utilits.APP_ACTIVITY
 import com.example.chatapp.utilits.PERMISSION_CODE_READ_CONTACTS
 import com.example.chatapp.utilits.showToast
-import com.example.chatapp.viewmodel.ContactsViewModel
+import com.example.chatapp.viewmodel.CreateGroupChatViewModel
 
+class CreateGroupChatFragment : Fragment(R.layout.fragment_create_group_chat), CreateGroupChatRecyclerViewAdapter.OnCheckboxClickListener {
 
-class ContactsFragment : Fragment() {
+    private lateinit var binding: FragmentCreateGroupChatBinding
+    private val viewModel by viewModels<CreateGroupChatViewModel>()
+    private lateinit var recyclerViewAdapter: CreateGroupChatRecyclerViewAdapter
 
-    private lateinit var binding: FragmentContactsBinding               // binding initialization
-    private val viewModel by viewModels<ContactsViewModel>()            // viewModel
-    private lateinit var recyclerViewAdapter: ContactsRecyclerViewAdapter      // recyclerViewAdapter
+    override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = FragmentCreateGroupChatBinding.inflate(layoutInflater, container, false)
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = FragmentContactsBinding.inflate(layoutInflater, container, false)
+        //fragment appearance
+        APP_ACTIVITY.setToolbarTitle("")
+        APP_ACTIVITY.showNavigationIcon()
+        APP_ACTIVITY.hideCreateChatIcon()
+        APP_ACTIVITY.hideBottomNavBar()
+        binding.btnCreateGroup.visibility = View.GONE
 
         observeViewModel()
-
+        setUpClickListeners()
         return binding.root
     }
 
@@ -39,7 +46,9 @@ class ContactsFragment : Fragment() {
     }
 
     fun observeViewModel(){
-        viewModel.registerUserList.observe(viewLifecycleOwner, Observer {
+
+        // list of registered users
+        viewModel.registerUserListLiveData.observe(viewLifecycleOwner, Observer {
             if (it.isEmpty()){                              // list of register users is empty
                 binding.tvEmpty.visibility = View.VISIBLE
                 binding.progressBar.visibility = View.GONE
@@ -48,12 +57,40 @@ class ContactsFragment : Fragment() {
                 initRecyclerView(it)
             }
         })
+
+        // list of users in group
+        viewModel.groupListLiveData.observe(viewLifecycleOwner, Observer {
+            if (it.isEmpty()){
+                binding.btnCreateGroup.visibility = View.GONE
+            } else {
+                binding.btnCreateGroup.visibility = View.VISIBLE
+            }
+        })
+
+        // result of chat creating
+        viewModel.isChatCreatingSuccessfulLiveData.observe(viewLifecycleOwner, Observer {
+            if (it){
+                showToast("Chat is successfully created")
+                //replaceFragment(ChatFragment())
+            } else { showToast("Error occurred")}
+        })
+    }
+
+    fun setUpClickListeners(){
+        binding.btnCreateGroup.setOnClickListener{
+            if (binding.etChatName.text.toString().trim { it <= ' ' }.isEmpty()){
+                binding.tilChatName.error = "Fill in!"
+            } else {
+                viewModel.createGroup(binding.etChatName.text.toString().trim { it <= ' ' })
+            }
+        }
     }
 
     fun initRecyclerView(userList: List<User>){
-        recyclerViewAdapter = ContactsRecyclerViewAdapter(userList)
-        binding.contactsRecyclerView.adapter = recyclerViewAdapter
+        recyclerViewAdapter = CreateGroupChatRecyclerViewAdapter(userList, this)
+        binding.createGroupRecyclerView.adapter = recyclerViewAdapter
     }
+
 
     // check permission for reading contacts on device
     @RequiresApi(Build.VERSION_CODES.O)         // to use cursor
@@ -82,7 +119,17 @@ class ContactsFragment : Fragment() {
                 binding.tvEmpty.visibility = View.VISIBLE
                 showToast("Permission denied")
             }
+
         }
     }
 
+    // interface implementation
+    override fun onClick(position: Int, isChecked: Boolean) {
+        viewModel.receiveCheckboxInfo(position, isChecked)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        APP_ACTIVITY.showBottomnavBar()
+    }
 }

@@ -1,23 +1,16 @@
 package com.example.chatapp.adapter
 
-import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.chatapp.`object`.FirebaseObject
 import com.example.chatapp.`object`.FirebaseObject.FOLDER_IMAGES
-import com.example.chatapp.`object`.ImageObject
 import com.example.chatapp.`object`.User
-import com.example.chatapp.`object`.UserObject
 import com.example.chatapp.databinding.ContactsRecyclerViewItemBinding
 import com.example.chatapp.utilits.APP_ACTIVITY
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 /** ADAPTER gets the data, adapts it to recyclerView and shows to user*/
 class ContactsRecyclerViewAdapter(private val userList: List<User>):

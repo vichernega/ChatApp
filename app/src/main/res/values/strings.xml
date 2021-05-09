@@ -21,4 +21,7 @@
     <string name="take_a_photo">Take a photo</string>
     <string name="choose_from_gallery">Choose from gallery</string>
     <string name="empty">Empty</string>
+    <string name="create_chat">Create chat</string>
+    <string name="create_group">Create group</string>
+    <string name="chat_name">Chat name</string>
 </resources>

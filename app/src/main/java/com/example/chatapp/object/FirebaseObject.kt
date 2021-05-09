@@ -1,12 +1,12 @@
 package com.example.chatapp.`object`
 
-import android.net.Uri
 import android.util.Log
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.tasks.await
+import java.util.*
 
 object FirebaseObject {
 
@@ -14,6 +14,7 @@ object FirebaseObject {
     private val storage = Firebase.storage.reference
 
     const val COLLECTION_USERS = "users"
+    const val COLLECTION_CHATS = "chats"
     const val FOLDER_IMAGES = "images/"
 
 
@@ -56,6 +57,21 @@ object FirebaseObject {
             .addOnFailureListener { Log.d("IMAGE", "getUserProfileImage() is FAILED: ${it.message}") }
             .await()
         return isSuccess        // true if task is successful
+    }
+
+    suspend fun createChat(chat: ChatObject): Boolean{
+        var isSuccessful = false
+
+        firestore.collection(COLLECTION_USERS).document(UserObject.id)
+            .collection(COLLECTION_CHATS).document(chat.id)
+            .set(chat)
+            .addOnSuccessListener {
+                isSuccessful = true
+                Log.d("CHAT", "createChat() is SUCCESSFUL")
+            }
+            .addOnFailureListener { Log.d("CHAT", "createChat() is FAILED: ${it.message}") }
+            .await()
+        return isSuccessful
     }
 
 }
