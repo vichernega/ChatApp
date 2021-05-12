@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="end"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/small_normal_margin"
+        android:layout_marginBottom="@dimen/small_normal_margin"
+        android:paddingBottom="3dp"
+        android:maxWidth="300dp"
+        android:paddingTop="@dimen/message_vertical_padding"
+        android:layout_gravity="end"
+        android:background="@drawable/my_message_bg"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/text"
+            style="@style/MessageText"
+            android:maxWidth="300dp"
+            tools:text="vsdvvfvfnfkvnlkxnvlknvzlvdvnjdk jsdjkd vdsj djhgdg dgfdg dfbfd fdfdb dfdfg dfd dffd dsjhv vsdjh dsjhg sdjh"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/time"
+            style="@style/MessageSmallText"
+            tools:text="12/12/12"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

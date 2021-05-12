@@ -6,7 +6,6 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.tasks.await
-import java.util.*
 
 object FirebaseObject {
 
@@ -15,6 +14,7 @@ object FirebaseObject {
 
     const val COLLECTION_USERS = "users"
     const val COLLECTION_CHATS = "chats"
+    const val COLLECTION_MESSAGES = "messages"
     const val FOLDER_IMAGES = "images/"
 
 
@@ -62,15 +62,18 @@ object FirebaseObject {
     suspend fun createChat(chat: ChatObject): Boolean{
         var isSuccessful = false
 
-        firestore.collection(COLLECTION_USERS).document(UserObject.id)
-            .collection(COLLECTION_CHATS).document(chat.id)
-            .set(chat)
-            .addOnSuccessListener {
-                isSuccessful = true
-                Log.d("CHAT", "createChat() is SUCCESSFUL")
-            }
-            .addOnFailureListener { Log.d("CHAT", "createChat() is FAILED: ${it.message}") }
-            .await()
+        // create chat in every user in DB
+        for (member in chat.members){
+            firestore.collection(COLLECTION_USERS).document(member.id)
+                .collection(COLLECTION_CHATS).document(chat.id)
+                .set(chat)
+                .addOnSuccessListener {
+                    isSuccessful = true
+                    Log.d("CHAT", "createChat() is SUCCESSFUL")
+                }
+                .addOnFailureListener { Log.d("CHAT", "createChat() is FAILED: ${it.message}") }
+                .await()
+        }
         return isSuccessful
     }
 

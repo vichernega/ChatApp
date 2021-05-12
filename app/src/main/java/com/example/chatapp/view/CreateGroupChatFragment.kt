@@ -16,6 +16,7 @@ import com.example.chatapp.adapter.CreateGroupChatRecyclerViewAdapter
 import com.example.chatapp.databinding.FragmentCreateGroupChatBinding
 import com.example.chatapp.utilits.APP_ACTIVITY
 import com.example.chatapp.utilits.PERMISSION_CODE_READ_CONTACTS
+import com.example.chatapp.utilits.replaceFragment
 import com.example.chatapp.utilits.showToast
 import com.example.chatapp.viewmodel.CreateGroupChatViewModel
 
@@ -71,7 +72,7 @@ class CreateGroupChatFragment : Fragment(R.layout.fragment_create_group_chat), C
         viewModel.isChatCreatingSuccessfulLiveData.observe(viewLifecycleOwner, Observer {
             if (it){
                 showToast("Chat is successfully created")
-                //replaceFragment(ChatFragment())
+                replaceFragment(ChatFragment())
             } else { showToast("Error occurred")}
         })
     }

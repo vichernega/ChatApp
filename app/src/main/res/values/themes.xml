@@ -88,6 +88,23 @@
         <item name="android:textSize">@dimen/normal_middle_text_size</item>
         <item name="android:textColor">@color/colorBlack</item>
     </style>
+
+    <style name="MessageText" parent="NormalText">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:paddingBottom">@dimen/normal_margin</item>
+        <item name="android:paddingStart">@dimen/message_horizontal_padding</item>
+        <item name="android:paddingEnd">@dimen/message_vertical_padding</item>
+    </style>
+
+    <style name="MessageSmallText">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textSize">@dimen/message_small_text</item>
+        <item name="android:textColor">@color/colorSilver</item>
+        <item name="android:paddingBottom">2dp</item>
+        <item name="android:paddingEnd">@dimen/message_vertical_padding</item>
+        <item name="android:paddingStart">@dimen/message_horizontal_padding</item>
+    </style>
     
     
     <!--EDIT TEXT STYLE-->

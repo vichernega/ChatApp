@@ -24,4 +24,5 @@
     <string name="create_chat">Create chat</string>
     <string name="create_group">Create group</string>
     <string name="chat_name">Chat name</string>
+    <string name="input">Input..</string>
 </resources>

@@ -10,10 +10,7 @@ import com.example.chatapp.utilits.APP_ACTIVITY
 import com.example.chatapp.utilits.replaceActivity
 import com.example.chatapp.utilits.replaceFragment
 import com.example.chatapp.utilits.replaceFragmentWithNoBackStack
-import com.example.chatapp.view.ChatsFragment
-import com.example.chatapp.view.ContactsFragment
-import com.example.chatapp.view.CreateGroupChatFragment
-import com.example.chatapp.view.SettingsFragment
+import com.example.chatapp.view.*
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -75,6 +72,11 @@ class MainActivity : AppCompatActivity() {
             }
             // if current fragment is ChatsFragment or SettingsFragment app closes
             else if (currentFragment is ContactsFragment || currentFragment is SettingsFragment){
+                binding.bottomNavBar.selectedItemId = R.id.nav_chats
+            }
+            else if (currentFragment is ChatFragment) {
+                replaceFragmentWithNoBackStack(ChatsFragment())
+                showBottomnavBar()
                 binding.bottomNavBar.selectedItemId = R.id.nav_chats
             }
             // in another case user navigates by back stack

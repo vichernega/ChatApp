@@ -6,12 +6,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.ChatsFragment">
 
+    <!-- RECYCLER VIEW -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chats_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/chats_recycler_view_item"
+        android:isScrollContainer="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <!-- EMPTY MESSAGE -->
     <TextView
-        style="@style/HeadingText"
-        android:text="CHATS"
+        android:id="@+id/tv_empty"
+        style="@style/LargeText"
+        android:text="@string/empty"
+        android:visibility="invisible"
+        android:textColor="@color/colorSilver"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="@style/ProgressBar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

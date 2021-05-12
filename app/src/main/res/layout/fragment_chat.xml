@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".view.ChatFragment">
+
+    <!-- RECYCLER VIEW -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chat_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:stackFromEnd="true"
+        android:isScrollContainer="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/input_container"/>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/input_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/small_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" >
+
+        <!-- BUTTON ATTACH FILE -->
+        <ImageView
+            android:id="@+id/btn_attach_file"
+            android:layout_width="@dimen/small_icon"
+            android:layout_height="@dimen/small_icon"
+            android:layout_margin="@dimen/small_margin"
+            android:src="@drawable/ic_attach_file"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <!-- INPUT -->
+        <EditText
+            android:id="@+id/input"
+            android:layout_width="match_parent"
+            android:layout_marginStart="@dimen/larger_margin"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorGrey"
+            android:hint="@string/input"
+            android:layout_marginEnd="@dimen/larger_margin"
+            android:paddingStart="@dimen/message_horizontal_padding"
+            android:paddingEnd="@dimen/message_horizontal_padding"
+            android:backgroundTint="@color/colorSilver"
+            app:layout_constraintStart_toEndOf="@+id/btn_attach_file"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <!-- BUTTON SEND -->
+        <ImageView
+            android:id="@+id/btn_send"
+            android:layout_width="@dimen/small_icon"
+            android:layout_height="@dimen/small_icon"
+            android:layout_margin="@dimen/small_margin"
+            android:src="@drawable/ic_send"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- EMPTY MESSAGE -->
+    <TextView
+        android:id="@+id/tv_empty"
+        style="@style/LargeText"
+        android:text="@string/empty"
+        android:visibility="invisible"
+        android:textColor="@color/colorSilver"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="@style/ProgressBar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

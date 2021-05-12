@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.chatapp.`object`.ChatObject
 import com.example.chatapp.`object`.FirebaseObject
 import com.example.chatapp.`object`.User
+import com.example.chatapp.`object`.UserObject
 import com.example.chatapp.utilits.APP_ACTIVITY
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -25,6 +26,8 @@ class CreateGroupChatRepository {
     suspend fun createGroup(name: String, members: MutableList<User>){
         val chatId = UUID.randomUUID().toString()               // generate chat id
         ChatObject.create(chatId, name, members)
+        val currentUser = User(UserObject)
+        members.add(currentUser)
         // create chat and save result of task in liveData
         _isChatCreatingSuccessfulLiveData.postValue(FirebaseObject.createChat(ChatObject))
     }
