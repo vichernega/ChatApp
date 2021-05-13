@@ -27,7 +27,7 @@ class ChatRepository {
 
         //saving data to message object
         val authorName = UserObject.firstName + " " + UserObject.lastName
-        val time = LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT))
+        val time = LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.MEDIUM))
 
         MessageObject.set(UserObject.id, authorName, time.toString(), message)
 
@@ -44,7 +44,7 @@ class ChatRepository {
     }
 
     fun getChat(){
-        var messagesList = mutableListOf<MessageItem>()
+        val messagesList = mutableListOf<MessageItem>()
         Firebase.firestore.collection(COLLECTION_USERS).document(UserObject.id)
             .collection(COLLECTION_CHATS).document(ChatObject.id)
             .collection(COLLECTION_MESSAGES)
@@ -62,6 +62,22 @@ class ChatRepository {
                 Log.d("MESSAGE", "Repository getChat() is SUCCESSFUL")
             }
             .addOnFailureListener { Log.d("MESSAGE", "Repository getChat() is FAILED: ${it.message}") }
+
     }
 
+    init {
+        Firebase.firestore.collection(COLLECTION_USERS).document(UserObject.id)
+            .collection(COLLECTION_CHATS).document(ChatObject.id)
+            .collection(COLLECTION_MESSAGES)
+            .addSnapshotListener { snapshot, error ->
+                if (error != null){
+                    Log.d("MESSAGE", "Repository observeChanges() is FAILED: ${error.message}")
+                    return@addSnapshotListener
+                }
+                if (snapshot != null) {
+                    getChat()
+                    Log.d("MESSAGE", "Repository observeChanges() snapshot: ")
+                } else { Log.d("MESSAGE", "Repository observeChanges() is FAILED: current data: null ${error?.message}") }
+            }
+    }
 }

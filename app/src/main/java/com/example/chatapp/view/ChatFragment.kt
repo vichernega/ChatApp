@@ -43,6 +43,11 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
         viewModel.getChat()     // get all user chats from db
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.observeChanges()
+    }
+
     fun initRecyclerViewAdapter(messageList: MutableList<MessageItem>){
         recyclerViewAdapter = ChatRecyclerViewAdapter(messageList)
         binding.chatRecyclerView.adapter = recyclerViewAdapter

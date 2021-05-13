@@ -23,4 +23,10 @@ class ChatViewModel: ViewModel() {
             repo.getChat()
         }
     }
+
+    fun observeChanges(){
+        viewModelScope.launch(Dispatchers.IO){
+            //repo.observeChanges()
+        }
+    }
 }
