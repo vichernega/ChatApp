@@ -98,4 +98,9 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
         else APP_ACTIVITY.setToolbarTitle(ChatObject.name)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.clearList()
+    }
+
 }

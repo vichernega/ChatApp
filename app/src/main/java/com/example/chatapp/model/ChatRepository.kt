@@ -100,4 +100,8 @@ class ChatRepository {
             .await()
         return imageName
     }
+
+    fun clearList(){
+        _messagesListLiveData.postValue(mutableListOf())
+    }
 }

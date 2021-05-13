@@ -31,4 +31,8 @@ class ChatViewModel: ViewModel() {
         }
     }
 
+    fun clearList(){
+        repo.clearList()
+    }
+
 }
