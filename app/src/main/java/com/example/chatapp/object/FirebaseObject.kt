@@ -1,6 +1,11 @@
 package com.example.chatapp.`object`
 
+import android.net.Uri
 import android.util.Log
+import android.view.View
+import android.widget.ImageView
+import com.bumptech.glide.Glide
+import com.example.chatapp.utilits.APP_ACTIVITY
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -75,6 +80,22 @@ object FirebaseObject {
                 .await()
         }
         return isSuccessful
+    }
+
+    fun downloadImage(uid: String, image: String, imageView: ImageView){
+        val imageRef = Firebase.storage.reference
+            .child(FOLDER_IMAGES + uid + "/" + image)
+
+        imageRef.downloadUrl                            // get image uri
+            .addOnSuccessListener {
+                Glide.with(APP_ACTIVITY)                // load image from DB and show in ImageView
+                    .load(it)
+                    .into(imageView)
+                Log.d("IMAGE", "downloadImage() is SUCCESSFUL")
+            }
+            .addOnFailureListener {
+                Log.d("IMAGE", "downloadImage() is FAILED: ${it.message}")
+            }
     }
 
 }

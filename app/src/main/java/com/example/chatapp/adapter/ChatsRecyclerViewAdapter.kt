@@ -5,11 +5,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.chatapp.`object`.Chat
-import com.example.chatapp.`object`.ChatObject
+import com.example.chatapp.`object`.*
 import com.example.chatapp.`object`.FirebaseObject.FOLDER_IMAGES
-import com.example.chatapp.`object`.User
-import com.example.chatapp.`object`.UserObject
 import com.example.chatapp.databinding.ChatsRecyclerViewItemBinding
 import com.example.chatapp.utilits.APP_ACTIVITY
 import com.example.chatapp.utilits.replaceFragment
@@ -46,19 +43,9 @@ class ChatsRecyclerViewAdapter(private val chatsList: MutableList<Chat>):
             }
         }
 
+        // set user image (get it from db)
         if (member!!.image.isNotEmpty()){
-            // image reference
-            val imageRef = Firebase.storage.reference
-                .child(FOLDER_IMAGES + member.id + "/" + member.image)
-
-            imageRef.downloadUrl                            // get image uri
-                .addOnSuccessListener {
-                    Glide.with(APP_ACTIVITY)                // load image from DB and show in ImageView
-                        .load(it)
-                        .into(holder.binding.profileImage)
-                    Log.d("IMAGE", "getUserProfileImage1() is SUCCESSFUL")
-                }
-                .addOnFailureListener { Log.d("IMAGE", "getUserProfileImage1() is FAILED: ${it.message}") }
+            FirebaseObject.downloadImage(member.id, member.image, holder.binding.profileImage)
         }
 
         if (chatsList[position].members.size == 2){     // setting full name as title

@@ -14,6 +14,7 @@ import com.example.chatapp.`object`.ImageObject
 import com.example.chatapp.`object`.UserObject
 import com.example.chatapp.databinding.FragmentSettingsBinding
 import com.example.chatapp.utilits.APP_ACTIVITY
+import com.example.chatapp.utilits.TAG_SET_PROFILE_IMAGE
 import com.example.chatapp.utilits.replaceActivity
 import com.example.chatapp.utilits.replaceFragment
 import com.example.chatapp.viewmodel.SettingsViewModel
@@ -61,7 +62,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
         // show Dialog Fragment after click on profileImage
         binding.profileImage.setOnClickListener {
-            ChooseImageActionDialogFragment().show(parentFragmentManager, "chooseImageAction")
+            ChooseImageActionDialogFragment().show(parentFragmentManager, TAG_SET_PROFILE_IMAGE)
         }
         // on changePersonalInfo click
         binding.changePersonalInfoContainer.setOnClickListener {

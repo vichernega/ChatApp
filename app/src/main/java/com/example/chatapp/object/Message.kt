@@ -5,7 +5,7 @@ data class Message(
     val authorName: String,
     val time: String,
     val text: String,
-    /*val image: ImageObject?*/
+    val image: String
 ){
-    constructor() : this ("","", "", "")
+    constructor() : this ("","", "", "", "")
 }

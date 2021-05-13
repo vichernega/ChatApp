@@ -5,11 +5,14 @@ object MessageObject {
     var authorName: String = ""
     var time: String = ""
     var text: String = ""
+    var image: String = ""
 
-    fun set(authorId: String, authorName: String, time: String, text: String){
+    fun set(authorId: String, authorName: String, time: String, text: String, image: String){
         this.authorId = authorId
         this.authorName = authorName
         this.time = time
         this.text = text
+        this.image = image
     }
+
 }

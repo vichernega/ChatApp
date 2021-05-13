@@ -126,6 +126,19 @@
 
     </style>
 
+    <!-- IMAGE -->
+
+    <style name="MessageImage">
+        <item name="android:layout_height">260dp</item>
+        <item name="android:layout_width">260dp</item>
+        <item name="android:paddingBottom">@dimen/normal_margin</item>
+        <item name="android:paddingEnd">@dimen/normal_margin</item>
+        <item name="android:paddingStart">@dimen/normal_margin</item>
+        <item name="android:paddingTop">@dimen/message_vertical_padding</item>
+        <item name="android:visibility">gone</item>
+        <item name="android:scaleType">centerInside</item>
+    </style>
+
 
 
     <!--SEPARATOR-->

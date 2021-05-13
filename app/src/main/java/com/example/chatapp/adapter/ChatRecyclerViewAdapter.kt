@@ -1,14 +1,22 @@
 package com.example.chatapp.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.chatapp.`object`.FirebaseObject
+import com.example.chatapp.`object`.FirebaseObject.FOLDER_IMAGES
 import com.example.chatapp.`object`.MessageItem
 import com.example.chatapp.databinding.MyMessageItemBinding
 import com.example.chatapp.databinding.SenderMessageItemBinding
 import com.example.chatapp.other.CommonMessageViewHolder
+import com.example.chatapp.utilits.APP_ACTIVITY
 import com.example.chatapp.utilits.TYPE_MY_MESSAGE
 import com.example.chatapp.utilits.TYPE_SENDER_MESSAGE
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 
 /** ADAPTER gets the data, adapts it to recyclerView and shows to user*/
 class ChatRecyclerViewAdapter(private val messageList: MutableList<MessageItem>):
@@ -54,8 +62,16 @@ class ChatRecyclerViewAdapter(private val messageList: MutableList<MessageItem>)
         private val time = binding.time
 
         override fun bind(item: MessageItem) {
-            text.text = item.text
             time.text = item.time
+            // if message has only text
+            if (item.text.isNotEmpty()){
+                text.text = item.text
+            }
+            // if message has only image download it and put in imageView
+            else {
+                binding.image.visibility = View.VISIBLE
+                FirebaseObject.downloadImage(item.authorId, item.image, binding.image)
+            }
         }
     }
 
@@ -67,8 +83,16 @@ class ChatRecyclerViewAdapter(private val messageList: MutableList<MessageItem>)
 
         override fun bind(item: MessageItem) {
             author.text = item.authorName
-            text.text = item.text
             time.text = item.time
+            // if message has only text
+            if (item.text.isNotEmpty()){
+                text.text = item.text
+            }
+            // if message has only image download it and put in imageView
+            else {
+                binding.image.visibility = View.VISIBLE
+                FirebaseObject.downloadImage(item.authorId, item.image, binding.image)
+            }
         }
     }
 }

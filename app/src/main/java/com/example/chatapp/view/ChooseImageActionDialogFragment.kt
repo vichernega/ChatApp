@@ -18,13 +18,16 @@ import com.example.chatapp.databinding.DialogChooseImageActionBinding
 import com.example.chatapp.utilits.APP_ACTIVITY
 import com.example.chatapp.utilits.PERMISSION_CODE_CAMERA_IMAGE
 import com.example.chatapp.utilits.PERMISSION_CODE_GALLERY_IMAGE
+import com.example.chatapp.utilits.TAG_SET_PROFILE_IMAGE
+import com.example.chatapp.viewmodel.ChatViewModel
 import com.example.chatapp.viewmodel.SettingsViewModel
 
 
 class ChooseImageActionDialogFragment: DialogFragment(R.layout.dialog_choose_image_action) {
 
     private lateinit var binding: DialogChooseImageActionBinding            // viewBinding variable
-    private val viewModel: SettingsViewModel by activityViewModels()
+    private val settingsViewModel: SettingsViewModel by activityViewModels()
+    private val chatViewModel: ChatViewModel by activityViewModels()
     var imageUri: Uri? = null
 
     /**getting permission to use camera*/
@@ -53,9 +56,17 @@ class ChooseImageActionDialogFragment: DialogFragment(R.layout.dialog_choose_ima
     /**taking picture with camera*/
     val cameraTakePicture = registerForActivityResult(TakePicture()){ success ->
         if (success){
-            UserObject.image = imageUri.toString()                                   // save image to local User
-            Log.d("IMAGE", "IN CHOOSE IMAGE ACTION")
-            imageUri?.let { it -> viewModel.saveUserImage(it) }      // change viewModel liveData
+
+            if (this.tag == TAG_SET_PROFILE_IMAGE){
+                UserObject.image = imageUri.toString()                                   // save image to local User
+                Log.d("IMAGE", "IN PROFILE IMAGE CHOOSE")
+                imageUri?.let { it -> settingsViewModel.saveUserImage(it) }      // change viewModel liveData
+            }
+            else {
+                Log.d("IMAGE", "IN MESSAGE IMAGE CHOOSE")
+                imageUri?.let { it -> chatViewModel.sendImage(it) }      //
+            }
+
 
             Log.d("IMAGE", "Success")
             Log.d("IMAGE", imageUri.toString())
@@ -84,8 +95,14 @@ class ChooseImageActionDialogFragment: DialogFragment(R.layout.dialog_choose_ima
     /** get existing picture from gallery*/
     val takePictureFromGallery = registerForActivityResult(GetContent()) {
         if (it != null) {
-            UserObject.image = it.toString()                 // save image to local User
-            viewModel.saveUserImage(it)      // change viewModel liveData
+            if (this.tag == TAG_SET_PROFILE_IMAGE){
+                UserObject.image = it.toString()                 // save image to local User
+                settingsViewModel.saveUserImage(it)      // change viewModel liveData
+                Log.d("IMAGE", "IN PROFILE IMAGE CHOOSE")
+            } else {
+                Log.d("IMAGE", "IN MESSAGE IMAGE CHOOSE")
+                chatViewModel.sendImage(it)      //
+            }
 
             Log.d("IMAGE", "uri val in choose image ---- " + it.toString())
             Log.d("IMAGE", "userImage val in choose image ---- " + UserObject.image.toString())

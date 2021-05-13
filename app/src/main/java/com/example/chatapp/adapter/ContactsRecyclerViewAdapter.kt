@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.chatapp.`object`.FirebaseObject
 import com.example.chatapp.`object`.FirebaseObject.FOLDER_IMAGES
 import com.example.chatapp.`object`.User
 import com.example.chatapp.databinding.ContactsRecyclerViewItemBinding
@@ -35,18 +36,7 @@ class ContactsRecyclerViewAdapter(private val userList: List<User>):
 
         // set profile image
         if (userList[position].image.isNotEmpty()){
-            // image reference
-            val imageRef = Firebase.storage.reference
-                .child(FOLDER_IMAGES + userList[position].id + "/" + userList[position].image)
-
-            imageRef.downloadUrl                            // get image uri
-                .addOnSuccessListener {
-                    Glide.with(APP_ACTIVITY)                // load image from DB and show in ImageView
-                        .load(it)
-                        .into(holder.binding.profileImage)
-                    Log.d("IMAGE", "getUserProfileImage1() is SUCCESSFUL")
-                }
-                .addOnFailureListener { Log.d("IMAGE", "getUserProfileImage1() is FAILED: ${it.message}") }
+            FirebaseObject.downloadImage(userList[position].id, userList[position].image, holder.binding.profileImage)
         }
 
         // set full name

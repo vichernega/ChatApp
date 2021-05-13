@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import com.example.chatapp.R
 import com.example.chatapp.`object`.ChatObject
 import com.example.chatapp.`object`.MessageItem
@@ -14,13 +14,12 @@ import com.example.chatapp.`object`.UserObject
 import com.example.chatapp.adapter.ChatRecyclerViewAdapter
 import com.example.chatapp.databinding.FragmentChatBinding
 import com.example.chatapp.utilits.APP_ACTIVITY
-import com.example.chatapp.utilits.replaceFragmentWithNoBackStack
 import com.example.chatapp.viewmodel.ChatViewModel
 
 class ChatFragment : Fragment(R.layout.fragment_chat) {
 
     private lateinit var binding: FragmentChatBinding
-    private val viewModel by viewModels<ChatViewModel>()
+    private val viewModel: ChatViewModel by activityViewModels()
     private lateinit var recyclerViewAdapter: ChatRecyclerViewAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -43,11 +42,6 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
         viewModel.getChat()     // get all user chats from db
     }
 
-    override fun onResume() {
-        super.onResume()
-        viewModel.observeChanges()
-    }
-
     fun initRecyclerViewAdapter(messageList: MutableList<MessageItem>){
         recyclerViewAdapter = ChatRecyclerViewAdapter(messageList)
         binding.chatRecyclerView.adapter = recyclerViewAdapter
@@ -61,6 +55,7 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
                 binding.tvEmpty.visibility = View.VISIBLE
                 binding.progressBar.visibility = View.GONE
             } else {
+                binding.tvEmpty.visibility = View.GONE
                 binding.progressBar.visibility = View.GONE
                 initRecyclerViewAdapter(it)
             }
@@ -71,15 +66,14 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
 
         // btn to add picture
         binding.btnAttachFile.setOnClickListener {
-            TODO()
-            replaceFragmentWithNoBackStack(ChooseImageActionDialogFragment())
+            ChooseImageActionDialogFragment().show(parentFragmentManager, "chooseImageAction")
         }
 
         // btn to send text message
         binding.btnSend.setOnClickListener {
             Log.d("MESSAGE", "IN listener" + binding.input.toString().trim{ it <= ' '})
             if (readInput().isNotEmpty()){
-                viewModel.send(readInput())
+                viewModel.sendText(readInput())
                 binding.input.setText("")
             }
         }
